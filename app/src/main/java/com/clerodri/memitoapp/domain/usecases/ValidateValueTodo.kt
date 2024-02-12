@@ -1,27 +1,31 @@
 package com.clerodri.memitoapp.domain.usecases
 
+import android.util.Log
+
 class ValidateValueTodo {
 
     fun execute(value:String):ValidationResult{
-        if(value.length > 6){
-                return ValidationResult(
-                    successful = false,
-                    errorMessage = "The value needs to consist max 6 digits "
-                )
-        }
-        val containsDigits = value.any{ it.isDigit() }
-        if(!containsDigits){
+        if(value.isBlank()){
             return ValidationResult(
                 successful = false,
-                errorMessage = "The value needs to contain only numbers"
+                errorMessage = "The value cant be blank"
             )
         }
+        val parts = value.trim().split(".")
+        // Validate the whole part
+        if (parts[0].length > 3) return ValidationResult(
+            successful = false,
+            errorMessage = "The value needs to consist max 3 digits "
+        )
+
         return ValidationResult(
             successful = true
         )
+    }
+
 
     }
 
 
 
-}
+

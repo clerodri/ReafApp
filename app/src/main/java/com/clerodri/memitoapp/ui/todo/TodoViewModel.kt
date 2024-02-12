@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clerodri.memitoapp.domain.usecases.TodoUsesCases
 import com.clerodri.memitoapp.ui.todo.TodoState
+import com.clerodri.memitoapp.util.FormateValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -49,26 +50,30 @@ class TodoViewModel @Inject constructor(
                     }
                 }
                 is RegistrationTodoEvent.ValueChanged -> {
-
+                    
+                    _validationUIState.update {
+                        it.copy(valueTodo = event.newValue)
+                    }
                 }
 
-                else -> {}
+
             }
         }
 
     private fun submitData() {
-        Log.d("VALEEE", "NAME: " + validationUIState.value.nameTodo)
-        Log.d("VALEEE", "ERROR NAME: " + validationUIState.value.nameTodoError)
         val nameResult = todoUsesCases.validateTodoName.execute(_validationUIState.value.nameTodo)
-        //     val valueResult = todoUsesCases.validateValueTodo.execute(_validationUIState.value.valueTodo.toString())
-        val hasError = listOf(nameResult).any { !it.successful }
+        Log.d("VALUE VM","ERROR VALUE vm : "+_validationUIState.value.valueTodo)
+        val valueResult = todoUsesCases.validateValueTodo.execute(_validationUIState.value.valueTodo)
+        val hasError = listOf(nameResult,valueResult).any { !it.successful }
         if (hasError) {
-            _validationUIState.update { it.copy(nameTodoError = nameResult.errorMessage) }
+            _validationUIState.update { it.copy(nameTodoError = nameResult.errorMessage,
+                                                valueTodoError = valueResult.errorMessage      ) }
             Log.d("VALEEE", "ERROR NAME: " + validationUIState.value.nameTodoError)
+            Log.d("VALEEE", "ERROR VALUE: " + validationUIState.value.valueTodoError)
             return
         }
         viewModelScope.launch {
-            _validationUIState.update { it.copy(nameTodoError = null) }
+            _validationUIState.update { it.copy(nameTodoError = null, valueTodoError = null) }
             validationEventChannel.send(ValidationEvent.Success)
         }
     }

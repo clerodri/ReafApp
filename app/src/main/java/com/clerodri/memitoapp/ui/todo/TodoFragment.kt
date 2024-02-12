@@ -27,6 +27,7 @@ import com.clerodri.memitoapp.ui.todo.RegistrationTodoEvent
 import com.clerodri.memitoapp.ui.todo.RegistrationTodoState
 import com.clerodri.memitoapp.ui.todo.TodoEvent
 import com.clerodri.memitoapp.ui.todo.TodoViewModel
+import com.clerodri.memitoapp.util.FormateValue
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -50,7 +51,7 @@ class TodoFragment : Fragment() {
     private lateinit var tvErrorName: TextView
     private lateinit var tvErrorValue: TextView
     //
-    private lateinit var test : StateFlow<RegistrationTodoState>
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +67,7 @@ class TodoFragment : Fragment() {
         initAdapter()
         initRV()
         initDialog()
-        test = todoViewModel.validationUIState
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 todoViewModel.uiState.collect(){
@@ -82,7 +83,9 @@ class TodoFragment : Fragment() {
                 todoViewModel.validationEvents.collect{
                     when(it) {
                         is TodoViewModel.ValidationEvent.Success -> {
-                             val todo = TodoInfo(etName.text.toString().uppercase(),etValue.text.toString())
+                            Log.d("VALUE VIEW","VALUE: "+etValue.text.toString())
+                            val newValue = FormateValue.validateAndFormatNumber(etValue.text.toString())
+                             val todo = TodoInfo(etName.text.toString().uppercase(),newValue)
                              todoViewModel.onEvent(TodoEvent.AddTodo(todo))
                              dialog.hide()
                              etName.text.clear()
@@ -90,7 +93,6 @@ class TodoFragment : Fragment() {
                             Toast.makeText(requireContext(),"TO-DO ADDED",Toast.LENGTH_SHORT).show()
                         }
 
-                        else -> {}
                     }
                 }
             }
@@ -99,10 +101,15 @@ class TodoFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 todoViewModel.validationUIState.collect() {
                     Log.d("VALEEE","ERROR NAME FRAGMENT: "+it.nameTodoError)
+                    Log.d("VALEEE","ERROR VALUE FRAGMENT: "+it.valueTodoError)
                   //  tvErrorName.visibility = View.GONE
                     if (it.nameTodoError != null) {
                         tvErrorName.text = it.nameTodoError
                         tvErrorName.visibility = View.VISIBLE
+                    }
+                    if (it.valueTodoError != null) {
+                        tvErrorValue.text = it.valueTodoError
+                        tvErrorValue.visibility = View.VISIBLE
                     }
                 }
             }
@@ -110,6 +117,7 @@ class TodoFragment : Fragment() {
 
         binding.fab.setOnClickListener {
             tvErrorName.visibility = View.GONE
+            tvErrorValue.visibility = View.GONE
             dialog.show()
 
         }
@@ -118,11 +126,20 @@ class TodoFragment : Fragment() {
             llManager.scrollToPositionWithOffset(todoAdapter.itemCount -1,10)
         }
         writingTodoName()
+        writingValue()
     }
 
     private fun writingTodoName() {
-        etName.doOnTextChanged { text, start, before, count ->  tvErrorName.visibility = View.GONE }
+        etName.doOnTextChanged { text, start, before, count ->
+            tvErrorName.visibility = View.GONE
+        }
         etName.doAfterTextChanged {  todoViewModel.onEventValidation(RegistrationTodoEvent.NameChanged(it.toString())) }
+    }
+    private fun writingValue(){
+        etValue.doOnTextChanged { text, start, before, count ->
+            tvErrorValue.visibility = View.GONE
+        }
+        etValue.doAfterTextChanged {  todoViewModel.onEventValidation(RegistrationTodoEvent.ValueChanged(it.toString())) }
     }
 
     private fun initAdapter(){
@@ -133,7 +150,6 @@ class TodoFragment : Fragment() {
         llManager  = LinearLayoutManager(requireContext())
     }
     private fun initRV() {
-        Log.d("ViewModel", "INITRV")
         binding.rvTodo.apply {
             layoutManager = llManager
             adapter = todoAdapter
