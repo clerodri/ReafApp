@@ -5,4 +5,11 @@
     <string name="record">RecordVoice</string>
     <string name="todo">To-Do</string>
     <string name="clear">Clear</string>
+    <string name="submit">add</string>
+    <string name="list_to_do">TO - DO</string>
+    <string name="precio">PRECIO</string>
+    <string name="name_todo">NAME TODO</string>
+    <string name="agregar_tarea">Agregar Tarea</string>
+    <string name="valor">Valor</string>
+    <string name="addTodo">Add</string>
 </resources>

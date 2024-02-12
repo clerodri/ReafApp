@@ -19,22 +19,26 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:layout_margin="32sp"
+        android:background="@drawable/ic_border"
         tools:text="asdaf"/>
 
-    <Button
-        android:id="@+id/btn_record"
-        android:layout_width="130dp"
+    <ImageView
+        android:id="@+id/ivRecord"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="@string/record"
         app:layout_constraintStart_toStartOf="@id/tvRecord"
         app:layout_constraintTop_toBottomOf="@+id/tvRecord"
         android:layout_margin="32dp"
+        android:src="@drawable/ic_mic"
+        android:background="@null"
         />
+
     <Button
         android:id="@+id/btn_clear"
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:text="@string/clear"
+        android:background="@null"
         app:layout_constraintEnd_toEndOf="@+id/tvRecord"
         app:layout_constraintTop_toBottomOf="@+id/tvRecord"
         android:layout_margin="32dp"
