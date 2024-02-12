@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/p"
+    android:background="@color/white"
     tools:context=".ui.record.RecordFragment">
 
     <TextView
@@ -37,8 +37,9 @@
         android:id="@+id/btn_clear"
         android:layout_width="130dp"
         android:layout_height="50dp"
+        android:textStyle="bold"
         android:text="@string/clear"
-        android:background="@null"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/tvRecord"
         app:layout_constraintTop_toBottomOf="@+id/tvRecord"
         android:layout_margin="32dp"

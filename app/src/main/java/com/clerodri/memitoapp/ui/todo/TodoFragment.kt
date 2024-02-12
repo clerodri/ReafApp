@@ -82,7 +82,7 @@ class TodoFragment : Fragment() {
                 todoViewModel.validationEvents.collect{
                     when(it) {
                         is TodoViewModel.ValidationEvent.Success -> {
-                             val todo = TodoInfo(etName.text.toString(),etValue.text.toString())
+                             val todo = TodoInfo(etName.text.toString().uppercase(),etValue.text.toString())
                              todoViewModel.onEvent(TodoEvent.AddTodo(todo))
                              dialog.hide()
                              etName.text.clear()
