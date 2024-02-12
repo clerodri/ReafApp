@@ -50,7 +50,7 @@ class TodoViewModel @Inject constructor(
                     }
                 }
                 is RegistrationTodoEvent.ValueChanged -> {
-                    
+
                     _validationUIState.update {
                         it.copy(valueTodo = event.newValue)
                     }
