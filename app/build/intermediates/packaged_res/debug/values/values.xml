@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#F5A300</color>
+    <color name="black">#FF000000</color>
+    <color name="p">#172B4D</color>
+    <color name="pd">#473103</color>
+    <color name="primary">#21427A</color>
+    <color name="primaryDark">#0D1729</color>
+    <color name="purple">#3F51B5</color>
+    <color name="red">#F10606</color>
+    <color name="secondary">#FF5630</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="yelow">#F4E459</color>
+    <string name="addTodo">Add</string>
+    <string name="agregar_tarea">Agregar Tarea</string>
+    <string name="app_name">MemitoApp</string>
+    <string name="clear">Clear</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="list_to_do">TO - DO</string>
+    <string name="name_todo">NAME TODO</string>
+    <string name="precio">PRECIO</string>
+    <string name="record">RecordVoice</string>
+    <string name="submit">add</string>
+    <string name="todo">To-Do</string>
+    <string name="valor">Valor</string>
+    <style name="Base.Theme.MemitoApp" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+        <item name="android:fontFamily">@font/playfairitalic_variablefont_wght</item>
+    </style>
+    <style name="Theme.MemitoApp" parent="Base.Theme.MemitoApp"/>
+</resources>

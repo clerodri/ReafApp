@@ -1,0 +1,130 @@
+[
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/layout_activity_main.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/drawable_ic_mic.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/drawable/ic_mic.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/layout_dialog_todo.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/layout/dialog_todo.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/menu_menu_bar.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/menu/menu_bar.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/font_playfairdisplayvariablefont_wght.ttf.flat",
+        "source": "com.clerodri.memitoapp-main-54:/font/playfairdisplayvariablefont_wght.ttf"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/layout_item_todo.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/layout/item_todo.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/layout_fragment_record.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/layout/fragment_record.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/navigation_main_graph.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/navigation/main_graph.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/drawable_ic_notes.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/drawable/ic_notes.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/color_selectorbar.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/color/selectorbar.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/drawable_ic_border.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/drawable/ic_border.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/drawable_dolar_iconpx.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/drawable/dolar_iconpx.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/drawable_add_icon.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/drawable/add_icon.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/xml_backup_rules.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/xml_data_extraction_rules.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/layout_fragment_todo.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/layout/fragment_todo.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/font_playfairitalic_variablefont_wght.ttf.flat",
+        "source": "com.clerodri.memitoapp-main-54:/font/playfairitalic_variablefont_wght.ttf"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-merged_res-52:/drawable_delete_icon.xml.flat",
+        "source": "com.clerodri.memitoapp-main-54:/drawable/delete_icon.xml"
+    }
+]

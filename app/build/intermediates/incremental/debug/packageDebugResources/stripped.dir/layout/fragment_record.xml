@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/p"
+    tools:context=".ui.record.RecordFragment">
+
+    <TextView
+        android:id="@+id/tvRecord"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.6"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_margin="32sp"
+        android:background="@drawable/ic_border"
+        tools:text="asdaf"/>
+
+    <ImageView
+        android:id="@+id/ivRecord"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="@id/tvRecord"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecord"
+        android:layout_margin="32dp"
+        android:src="@drawable/ic_mic"
+        android:background="@null"
+        />
+
+    <Button
+        android:id="@+id/btn_clear"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="@string/clear"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="@+id/tvRecord"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecord"
+        android:layout_margin="32dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

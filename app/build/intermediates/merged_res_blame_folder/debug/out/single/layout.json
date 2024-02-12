@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.clerodri.memitoapp-mergeDebugResources-51:/layout/activity_main.xml",
+        "source": "com.clerodri.memitoapp-main-54:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-mergeDebugResources-51:/layout/fragment_record.xml",
+        "source": "com.clerodri.memitoapp-main-54:/layout/fragment_record.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-mergeDebugResources-51:/layout/dialog_todo.xml",
+        "source": "com.clerodri.memitoapp-main-54:/layout/dialog_todo.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-mergeDebugResources-51:/layout/fragment_todo.xml",
+        "source": "com.clerodri.memitoapp-main-54:/layout/fragment_todo.xml"
+    },
+    {
+        "merged": "com.clerodri.memitoapp-mergeDebugResources-51:/layout/item_todo.xml",
+        "source": "com.clerodri.memitoapp-main-54:/layout/item_todo.xml"
+    }
+]
