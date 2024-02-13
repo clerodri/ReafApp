@@ -1,6 +1,7 @@
 package com.clerodri.memitoapp.domain.usecases
 
 import android.util.Log
+import androidx.core.text.isDigitsOnly
 
 class ValidateTodoName {
 
@@ -10,13 +11,20 @@ class ValidateTodoName {
             Log.d("VALIDATION", "NOMBRE VACIO")
             return ValidationResult(
                     successful = false,
-                    errorMessage = "The name cant be blank"
+                    errorMessage = "The NAME can't be blank"
                 )
+        }
+        val hasDigits = todoName.any { it.isDigit() }
+        if(hasDigits){
+            return ValidationResult(
+                successful = false,
+                errorMessage = "The NAME can't contains Numbers"
+            )
         }
         if(todoName.length > 8) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "The name needs to consist only 8 characters"
+                errorMessage = "The NAME needs to consist only 8 characters"
             )
         }
         return ValidationResult(
