@@ -4,6 +4,6 @@
         android:title="@string/record"
         android:icon="@drawable/ic_mic"/>
     <item android:id="@+id/todoFragment"
-        android:title="@string/todo"
+        android:title="@string/list_to_do"
         android:icon="@drawable/ic_notes"/>
 </menu>

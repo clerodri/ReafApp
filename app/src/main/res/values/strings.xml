@@ -1,15 +1,14 @@
 <resources>
-    <string name="app_name">MemitoApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">ReafApp</string>
+
+
+
     <string name="record">RecordVoice</string>
-    <string name="todo">To-Do</string>
     <string name="clear">Clear</string>
-    <string name="submit">add</string>
-    <string name="list_to_do">TO - DO</string>
-    <string name="precio">PRECIO</string>
-    <string name="name_todo">NAME TODO</string>
-    <string name="agregar_tarea">Agregar Tarea</string>
-    <string name="valor">Valor</string>
-    <string name="addTodo">Add</string>
+
+
+    <string name="list_to_do">Payments TO - DO</string>
+    <string name="paymentNameHint">INSERT PAYMENT NAME</string>
+    <string name="quantityHint">INSERT QUANTITY</string>
+    <string name="addPayment">Add Payment</string>
 </resources>

@@ -21,7 +21,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginTop="32dp"
         app:helperText="required*"
-        android:hint="TAREA"
+        android:hint="@string/paymentNameHint"
         app:counterEnabled="true"
         app:errorEnabled="true"
         app:counterMaxLength="8"
@@ -51,7 +51,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginTop="32dp"
         app:helperText="required*"
-        android:hint="VALUE"
+        android:hint="@string/quantityHint"
         app:startIconDrawable="@drawable/dolar_iconpx"
         >
 
@@ -68,7 +68,7 @@
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addTodo"
+        android:text="@string/addPayment"
         android:background="@drawable/round_button"
         android:layout_marginTop="15dp"
         android:layout_gravity="center"

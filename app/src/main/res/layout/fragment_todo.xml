@@ -39,7 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:contentDescription="@string/submit"
         android:backgroundTint="@color/accent"
         android:src="@drawable/add_icon"
         app:layout_constraintBottom_toBottomOf="parent"
