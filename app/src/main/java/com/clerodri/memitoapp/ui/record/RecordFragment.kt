@@ -3,12 +3,15 @@ package com.clerodri.memitoapp.ui.record
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.LauncherActivityInfo
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.clerodri.memitoapp.databinding.FragmentRecordBinding
@@ -23,16 +26,6 @@ class RecordFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    private val result =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val results = result.data?.getStringArrayListExtra(
-                    RecognizerIntent.EXTRA_RESULTS
-                ) as ArrayList<String>
-                binding.tvRecord.text = results[0]
-            }
-        }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,8 +37,18 @@ class RecordFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val res =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val results = result.data?.getStringArrayListExtra(
+                        RecognizerIntent.EXTRA_RESULTS
+                    ) as ArrayList<String>
+                    binding.tvRecord.text = results[0]
+                }
+            }
         binding.ivRecord.setOnClickListener {
             try {
+
                 val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
                 intent.putExtra(
                     RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -56,7 +59,7 @@ class RecordFragment : Fragment() {
                     Locale.getDefault()
                 )
                 intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say something")
-                result.launch(intent)
+                res.launch(intent)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -71,7 +74,30 @@ class RecordFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON PAUSE")
+        super.onPause()
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON CREATE")
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onStop() {
+        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON STOP")
+        super.onStop()
+    }
+
+    override fun onDestroyView() {
+        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON DESTROYVIEW")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON DESTROY")
+        super.onDestroy()
+    }
 }
 
 

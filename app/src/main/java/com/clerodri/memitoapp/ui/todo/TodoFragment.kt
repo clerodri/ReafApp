@@ -2,6 +2,7 @@ package com.clerodri.memitoapp.ui.todo
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,13 +34,14 @@ class TodoFragment : Fragment() {
     private var todoListAdapter : List<TodoInfo> = emptyList()
     private lateinit var  todoAdapter : TodoAdapter
     private lateinit var llManager : LinearLayoutManager
-    private lateinit var dialog : Dialog
+    private  var dialog : Dialog ?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTodoBinding.inflate(layoutInflater, container , false)
+        _dialogBinding = DialogTodo2Binding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -48,7 +50,6 @@ class TodoFragment : Fragment() {
         initAdapter()
         initRV()
         initDialog()
-
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 todoViewModel.uiState.collect(){
@@ -67,12 +68,13 @@ class TodoFragment : Fragment() {
                             val newValue = FormateValue.validateAndFormatNumber(dialogBinding.etValue.text.toString())
                              val todo = TodoInfo(dialogBinding.etTodoName.text.toString().uppercase(),newValue)
                              todoViewModel.onEvent(TodoEvent.AddTodo(todo))
-                            dialog.hide()
+
                             dialogBinding.etValue.text?.clear()
                             dialogBinding.etTodoName.text?.clear()
                             dialogBinding.textInputLayout.error = null
                             dialogBinding.textInputLayout2.error = null
                             Toast.makeText(requireContext(),"TO-DO ADDED",Toast.LENGTH_SHORT).show()
+                            dialog?.dismiss()
                         }
 
                     }
@@ -96,7 +98,7 @@ class TodoFragment : Fragment() {
         }
 
         binding.fab.setOnClickListener {
-            dialog.show()
+            dialog?.show()
         }
         dialogBinding.btnAdd.setOnClickListener {
             todoViewModel.onEventValidation(RegistrationTodoEvent.Add)
@@ -104,6 +106,12 @@ class TodoFragment : Fragment() {
         }
         writingTodoName()
         writingValue()
+    }
+
+    override fun onPause() {
+        Log.d("EVENTS FRAGMENTS","FRAGMENT TODO - ON PAUSE")
+
+        super.onPause()
     }
 
     private fun writingTodoName() {
@@ -137,9 +145,31 @@ class TodoFragment : Fragment() {
 
 
     private fun initDialog(){
-        dialog = Dialog(requireContext())
-        _dialogBinding = DialogTodo2Binding.inflate(layoutInflater)
-        dialog.setContentView(dialogBinding.root)
-        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+        requireContext().let {
+            dialog = Dialog(it)
+            dialog!!.setContentView(dialogBinding.root)
+            dialog!!.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+        }
+    }
+    private fun dissmissDialog(){
+        dialog?.dismiss()
+        dialog = null
+    }
+
+
+    override fun onStop() {
+        dissmissDialog()
+        Log.d("EVENTS FRAGMENTS","FRAGMENT TODO - ON STOP")
+        super.onStop()
+    }
+
+    override fun onDestroyView() {
+        Log.d("EVENTS FRAGMENTS","FRAGMENT TODO - ON DESTROYVIEW")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Log.d("EVENTS FRAGMENTS","FRAGMENT TODO - ON DESTROY")
+        super.onDestroy()
     }
 }
