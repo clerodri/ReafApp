@@ -1,15 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MemitoApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.MemitoApp" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:fontFamily">@font/playfairitalic_variablefont_wght</item>
     </style>
 
     <style name="Theme.MemitoApp" parent="Base.Theme.MemitoApp" />
-    <style name="MemitoAppNoActionBar" parent="Theme.AppCompat.NoActionBar">
+    <style name="MemitoAppNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:fontFamily">@font/playfairitalic_variablefont_wght</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="colorPrimary">@color/accent</item>
 
     </style>
 </resources>

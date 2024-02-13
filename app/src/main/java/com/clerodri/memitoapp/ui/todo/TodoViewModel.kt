@@ -95,7 +95,6 @@ class TodoViewModel @Inject constructor(
                                 }
                         }
 
-                    else -> {}
                 }
         }
 
