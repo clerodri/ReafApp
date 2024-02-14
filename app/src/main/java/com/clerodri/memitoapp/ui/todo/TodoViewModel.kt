@@ -1,9 +1,10 @@
 package com.clerodri.memitoapp.ui.todo
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.clerodri.memitoapp.domain.modelo.TodoInfo
 import com.clerodri.memitoapp.domain.usecases.TodoUsesCases
+import com.clerodri.memitoapp.util.FormateValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -59,6 +60,7 @@ class TodoViewModel @Inject constructor(
                     it.copy(valueTodo = event.newValue)
                 }
             }
+
             is RegistrationTodoEvent.onDialogShow -> {
 
                 _isDialogShow.update {
@@ -71,7 +73,6 @@ class TodoViewModel @Inject constructor(
 
     private fun submitData() {
         val nameResult = todoUsesCases.validateTodoName.execute(_validationUIState.value.nameTodo)
-        Log.d("VALUE VM", "ERROR VALUE vm : " + _validationUIState.value.valueTodo)
         val valueResult =
             todoUsesCases.validateValueTodo.execute(_validationUIState.value.valueTodo)
         val hasError = listOf(nameResult, valueResult).any { !it.successful }
@@ -82,13 +83,17 @@ class TodoViewModel @Inject constructor(
                     valueTodoError = valueResult.errorMessage
                 )
             }
-            Log.d("VALEEE", "ERROR NAME: " + validationUIState.value.nameTodoError)
-            Log.d("VALEEE", "ERROR VALUE: " + validationUIState.value.valueTodoError)
             return
         }
+        val name = validationUIState.value.nameTodo.uppercase()
+        val newValue = FormateValue.validateAndFormatNumber(validationUIState.value.valueTodo)
+        val todo = TodoInfo(name, newValue)
+        onEvent(TodoEvent.AddTodo(todo))
         viewModelScope.launch {
+            _isDialogShow.update { false }
             _validationUIState.update { it.copy(nameTodoError = null, valueTodoError = null) }
             validationEventChannel.send(ValidationEvent.Success)
+
         }
     }
 
@@ -100,6 +105,8 @@ class TodoViewModel @Inject constructor(
                     todoUsesCases.addTodo(event.todo)
                     getListTodo()
                 }
+
+
             }
 
             is TodoEvent.DeleteTodo -> {
@@ -107,6 +114,7 @@ class TodoViewModel @Inject constructor(
                     todoUsesCases.deleteTodo(event.todo)
                     getListTodo()
                 }
+
             }
 
         }

@@ -70,16 +70,11 @@ class TodoFragment : Fragment() {
         collectLatestLifecycleFlow(todoViewModel.validationEvents){
             when (it) {
                 is TodoViewModel.ValidationEvent.Success -> {
-
-                    val newTodo = formatTodo(dialogBinding.etTodoName.text.toString(),dialogBinding.etValue.text.toString())
-                    todoViewModel.onEvent(TodoEvent.AddTodo(newTodo))
-
                     dialogBinding.etValue.text?.clear()
                     dialogBinding.etTodoName.text?.clear()
                     dialogBinding.textInputLayout.error = null
                     dialogBinding.textInputLayout2.error = null
                     Toast.makeText(requireContext(), "TO-DO ADDED", Toast.LENGTH_SHORT).show()
-                    todoViewModel.onEventValidation(RegistrationTodoEvent.onDialogShow(false))
                 }
 
             }
@@ -160,6 +155,7 @@ class TodoFragment : Fragment() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
+            dialog!!.setTitle("DIALGO")
             dialog!!.setCancelable(true)
             dialog!!.setCanceledOnTouchOutside(true)
 
