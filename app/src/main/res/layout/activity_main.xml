@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     tools:context=".ui.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/primaryDark"
+        android:background="@color/btnNavigateView"
         app:layout_constraintEnd_toEndOf="parent"
         app:itemIconTint="@color/selectorbar"
         app:itemTextColor="@color/selectorbar"

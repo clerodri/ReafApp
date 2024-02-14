@@ -1,11 +1,9 @@
 package com.clerodri.memitoapp.domain.usecases
 
-import android.util.Log
-
 class ValidateValueTodo {
 
-    fun execute(value:String):ValidationResult{
-        if(value.isBlank()){
+    fun execute(value: String): ValidationResult {
+        if (value.isBlank()) {
             return ValidationResult(
                 successful = false,
                 errorMessage = "The QUANTITY can't be blank"
@@ -24,7 +22,7 @@ class ValidateValueTodo {
     }
 
 
-    }
+}
 
 
 

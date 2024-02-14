@@ -7,7 +7,7 @@ interface TodoRepository {
 
     fun getTodos(): Flow<List<TodoInfo>>
 
-    suspend fun  insertTodo(todo: TodoInfo)
+    suspend fun insertTodo(todo: TodoInfo)
 
     suspend fun deleteTodo(todo: TodoInfo)
 }

@@ -11,7 +11,7 @@
     <style name="MemitoAppNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:fontFamily">@font/playfairitalic_variablefont_wght</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="colorPrimary">@color/accent</item>
+        <item name="colorPrimary">@color/paymentsColor</item>
 
     </style>
 </resources>

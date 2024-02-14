@@ -3,12 +3,12 @@ package com.clerodri.memitoapp.ui.todo
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -25,22 +25,22 @@ import kotlinx.coroutines.launch
 class TodoFragment : Fragment() {
 
     private val todoViewModel by viewModels<TodoViewModel>()
-    private  var _binding: FragmentTodoBinding? = null
+    private var _binding: FragmentTodoBinding? = null
     private var _dialogBinding: DialogTodo2Binding? = null
     private val binding get() = _binding!!
     private val dialogBinding get() = _dialogBinding!!
 
 
-    private var todoListAdapter : List<TodoInfo> = emptyList()
-    private lateinit var  todoAdapter : TodoAdapter
-    private lateinit var llManager : LinearLayoutManager
-    private  var dialog : Dialog ?= null
+    private var todoListAdapter: List<TodoInfo> = emptyList()
+    private lateinit var todoAdapter: TodoAdapter
+    private lateinit var llManager: LinearLayoutManager
+    private var dialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTodoBinding.inflate(layoutInflater, container , false)
+        _binding = FragmentTodoBinding.inflate(layoutInflater, container, false)
         _dialogBinding = DialogTodo2Binding.inflate(layoutInflater)
         return binding.root
     }
@@ -51,8 +51,8 @@ class TodoFragment : Fragment() {
         initRV()
         initDialog()
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                todoViewModel.uiState.collect(){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                todoViewModel.uiState.collect() {
                     todoListAdapter = it.todos
                     todoAdapter.updateList(todoListAdapter)
                 }
@@ -61,19 +61,24 @@ class TodoFragment : Fragment() {
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                todoViewModel.validationEvents.collect{
-                    when(it) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                todoViewModel.validationEvents.collect {
+                    when (it) {
                         is TodoViewModel.ValidationEvent.Success -> {
-                            val newValue = FormateValue.validateAndFormatNumber(dialogBinding.etValue.text.toString())
-                             val todo = TodoInfo(dialogBinding.etTodoName.text.toString().uppercase(),newValue)
-                             todoViewModel.onEvent(TodoEvent.AddTodo(todo))
+                            val newValue =
+                                FormateValue.validateAndFormatNumber(dialogBinding.etValue.text.toString())
+                            val todo = TodoInfo(
+                                dialogBinding.etTodoName.text.toString().uppercase(),
+                                newValue
+                            )
+                            todoViewModel.onEvent(TodoEvent.AddTodo(todo))
 
                             dialogBinding.etValue.text?.clear()
                             dialogBinding.etTodoName.text?.clear()
                             dialogBinding.textInputLayout.error = null
                             dialogBinding.textInputLayout2.error = null
-                            Toast.makeText(requireContext(),"TO-DO ADDED",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "TO-DO ADDED", Toast.LENGTH_SHORT)
+                                .show()
                             dialog?.dismiss()
                         }
 
@@ -82,7 +87,7 @@ class TodoFragment : Fragment() {
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 todoViewModel.validationUIState.collect() {
 
                     if (it.nameTodoError != null) {
@@ -90,7 +95,7 @@ class TodoFragment : Fragment() {
 
                     }
                     if (it.valueTodoError != null) {
-                         dialogBinding.textInputLayout2.error = it.valueTodoError
+                        dialogBinding.textInputLayout2.error = it.valueTodoError
 
                     }
                 }
@@ -102,14 +107,14 @@ class TodoFragment : Fragment() {
         }
         dialogBinding.btnAdd.setOnClickListener {
             todoViewModel.onEventValidation(RegistrationTodoEvent.Add)
-            llManager.scrollToPositionWithOffset(todoAdapter.itemCount -1,10)
+            llManager.scrollToPositionWithOffset(todoAdapter.itemCount - 1, 10)
         }
         writingTodoName()
         writingValue()
     }
 
     override fun onPause() {
-        Log.d("EVENTS FRAGMENTS","FRAGMENT TODO - ON PAUSE")
+        Log.d("EVENTS FRAGMENTS", "FRAGMENT TODO - ON PAUSE")
 
         super.onPause()
     }
@@ -120,17 +125,23 @@ class TodoFragment : Fragment() {
         }
 
     }
-    private fun writingValue(){
-        dialogBinding.etValue.doAfterTextChanged {  todoViewModel.onEventValidation(RegistrationTodoEvent.ValueChanged(it.toString())) }
+
+    private fun writingValue() {
+        dialogBinding.etValue.doAfterTextChanged {
+            todoViewModel.onEventValidation(
+                RegistrationTodoEvent.ValueChanged(it.toString())
+            )
+        }
     }
 
-    private fun initAdapter(){
+    private fun initAdapter() {
         todoAdapter = TodoAdapter(
             list = todoListAdapter,
-            onDeleteClicked = {position -> onItemDeleted(position)}
+            onDeleteClicked = { position -> onItemDeleted(position) }
         )
-        llManager  = LinearLayoutManager(requireContext())
+        llManager = LinearLayoutManager(requireContext())
     }
+
     private fun initRV() {
         binding.rvTodo.apply {
             layoutManager = llManager
@@ -139,19 +150,23 @@ class TodoFragment : Fragment() {
     }
 
     private fun onItemDeleted(position: Int) {
-            val todoDelete = todoListAdapter[position]
-           todoViewModel.onEvent(TodoEvent.DeleteTodo(todoDelete))
+        val todoDelete = todoListAdapter[position]
+        todoViewModel.onEvent(TodoEvent.DeleteTodo(todoDelete))
     }
 
 
-    private fun initDialog(){
+    private fun initDialog() {
         requireContext().let {
             dialog = Dialog(it)
             dialog!!.setContentView(dialogBinding.root)
-            dialog!!.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog!!.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
     }
-    private fun dissmissDialog(){
+
+    private fun dissmissDialog() {
         dialog?.dismiss()
         dialog = null
     }
@@ -159,17 +174,17 @@ class TodoFragment : Fragment() {
 
     override fun onStop() {
         dissmissDialog()
-        Log.d("EVENTS FRAGMENTS","FRAGMENT TODO - ON STOP")
+        Log.d("EVENTS FRAGMENTS", "FRAGMENT TODO - ON STOP")
         super.onStop()
     }
 
     override fun onDestroyView() {
-        Log.d("EVENTS FRAGMENTS","FRAGMENT TODO - ON DESTROYVIEW")
+        Log.d("EVENTS FRAGMENTS", "FRAGMENT TODO - ON DESTROYVIEW")
         super.onDestroyView()
     }
 
     override fun onDestroy() {
-        Log.d("EVENTS FRAGMENTS","FRAGMENT TODO - ON DESTROY")
+        Log.d("EVENTS FRAGMENTS", "FRAGMENT TODO - ON DESTROY")
         super.onDestroy()
     }
 }

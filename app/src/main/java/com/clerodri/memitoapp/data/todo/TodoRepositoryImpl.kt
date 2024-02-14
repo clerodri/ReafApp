@@ -5,7 +5,7 @@ import com.clerodri.memitoapp.domain.modelo.TodoInfo
 import com.clerodri.memitoapp.domain.usecases.repository.TodoRepository
 import kotlinx.coroutines.flow.Flow
 
-class TodoRepositoryImpl(private val  dao: TodoDao) : TodoRepository {
+class TodoRepositoryImpl(private val dao: TodoDao) : TodoRepository {
     override fun getTodos(): Flow<List<TodoInfo>> {
         return dao.getAll()
     }

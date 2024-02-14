@@ -1,6 +1,6 @@
 package com.clerodri.memitoapp.domain.modelo
 
-import androidx.room.ColumnInfo
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

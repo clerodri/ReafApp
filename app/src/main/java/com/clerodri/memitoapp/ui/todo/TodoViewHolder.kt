@@ -17,10 +17,10 @@ class TodoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         binding.tvValor.text = todoInfo.valor
         binding.ivDelete.setOnClickListener {
-                onDeleteClicked(adapterPosition)
-            }
+            onDeleteClicked(adapterPosition)
         }
     }
+}
 
 
 

@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@color/paymentsColor"
+    android:id="@+id/todoFragment"
     tools:context=".ui.todo.TodoFragment">
 
     <TextView
@@ -13,7 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/list_to_do"
-        android:textColor="@color/accent"
+        android:textColor="@color/TitlePayment"
+        android:textStyle="bold"
         android:padding="10dp"
         android:fontFamily="@font/playfairitalic_variablefont_wght"
         app:layout_constraintEnd_toEndOf="parent"

@@ -12,5 +12,8 @@
     <color name="primary">#21427A</color>
     <color name="primaryDark">#0D1729</color>
     <color name="secondary">#FF5630</color>
+    <color name="TitlePayment">#837A78</color>
+    <color name="paymentsColor">#D89E91</color>
+    <color name="btnNavigateView">#E37F69</color>
     <color name="accent">#F5A300</color>
 </resources>

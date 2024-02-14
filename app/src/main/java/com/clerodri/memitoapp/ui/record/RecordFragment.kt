@@ -18,9 +18,7 @@ import com.clerodri.memitoapp.databinding.FragmentRecordBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 @AndroidEntryPoint
-
 class RecordFragment : Fragment() {
-    private lateinit var textToSpeech: TextToSpeech
 
     private var _binding: FragmentRecordBinding? = null
     private val binding get() = _binding!!
@@ -44,6 +42,7 @@ class RecordFragment : Fragment() {
                         RecognizerIntent.EXTRA_RESULTS
                     ) as ArrayList<String>
                     binding.tvRecord.text = results[0]
+
                 }
             }
         binding.ivRecord.setOnClickListener {
@@ -74,30 +73,7 @@ class RecordFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON PAUSE")
-        super.onPause()
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON CREATE")
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onStop() {
-        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON STOP")
-        super.onStop()
-    }
-
-    override fun onDestroyView() {
-        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON DESTROYVIEW")
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        Log.d("EVENTS FRAGMENTS","FRAGMENT RECORD - ON DESTROY")
-        super.onDestroy()
-    }
 }
 
 
