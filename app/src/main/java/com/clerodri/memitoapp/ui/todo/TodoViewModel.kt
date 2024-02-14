@@ -31,6 +31,8 @@ class TodoViewModel @Inject constructor(
     private var _validationUIState = MutableStateFlow(RegistrationTodoState())
     val validationUIState = _validationUIState.asStateFlow()
 
+    private var _isDialogShow = MutableStateFlow(false)
+    val isDialogShow = _isDialogShow.asStateFlow()
 
     private val validationEventChannel = Channel<ValidationEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
@@ -57,7 +59,12 @@ class TodoViewModel @Inject constructor(
                     it.copy(valueTodo = event.newValue)
                 }
             }
+            is RegistrationTodoEvent.onDialogShow -> {
 
+                _isDialogShow.update {
+                    event.isShow
+                }
+            }
 
         }
     }

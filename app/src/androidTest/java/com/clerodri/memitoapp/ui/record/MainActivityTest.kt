@@ -1,4 +1,4 @@
-package com.clerodri.memitoapp
+package com.clerodri.memitoapp.ui.record
 
 
 import androidx.test.core.app.ActivityScenario
@@ -7,8 +7,9 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import com.clerodri.memitoapp.R
+import com.clerodri.memitoapp.launchFragmentInHiltContainer
 import com.clerodri.memitoapp.ui.MainActivity
-import com.clerodri.memitoapp.ui.record.RecordFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before

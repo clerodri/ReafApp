@@ -6,5 +6,7 @@ sealed  class RegistrationTodoEvent {
 
     data object Add : RegistrationTodoEvent()
 
+    data class onDialogShow(val isShow:Boolean) : RegistrationTodoEvent()
+
 
 }

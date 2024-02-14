@@ -1,4 +1,4 @@
-package com.clerodri.memitoapp.ui.todo
+package com.clerodri.memitoapp.ui.todo.rv
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

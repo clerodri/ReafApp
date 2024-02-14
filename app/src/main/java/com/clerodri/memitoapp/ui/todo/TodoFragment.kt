@@ -17,8 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.clerodri.memitoapp.databinding.DialogTodo2Binding
 import com.clerodri.memitoapp.databinding.FragmentTodoBinding
 import com.clerodri.memitoapp.domain.modelo.TodoInfo
+import com.clerodri.memitoapp.ui.todo.rv.TodoAdapter
 import com.clerodri.memitoapp.util.FormateValue
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -50,73 +53,67 @@ class TodoFragment : Fragment() {
         initAdapter()
         initRV()
         initDialog()
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                todoViewModel.uiState.collect() {
-                    todoListAdapter = it.todos
-                    todoAdapter.updateList(todoListAdapter)
-                }
 
+        collectLatestLifecycleFlow(todoViewModel.isDialogShow){isDialogShow ->
+            if (isDialogShow){
+                dialog?.show()
+            }else{
+                dialog?.dismiss()
+            }
+
+        }
+        collectLatestLifecycleFlow(todoViewModel.uiState){
+                todoListAdapter = it.todos
+                todoAdapter.updateList(todoListAdapter)
+        }
+
+        collectLatestLifecycleFlow(todoViewModel.validationEvents){
+            when (it) {
+                is TodoViewModel.ValidationEvent.Success -> {
+
+                    val newTodo = formatTodo(dialogBinding.etTodoName.text.toString(),dialogBinding.etValue.text.toString())
+                    todoViewModel.onEvent(TodoEvent.AddTodo(newTodo))
+
+                    dialogBinding.etValue.text?.clear()
+                    dialogBinding.etTodoName.text?.clear()
+                    dialogBinding.textInputLayout.error = null
+                    dialogBinding.textInputLayout2.error = null
+                    Toast.makeText(requireContext(), "TO-DO ADDED", Toast.LENGTH_SHORT).show()
+                    todoViewModel.onEventValidation(RegistrationTodoEvent.onDialogShow(false))
+                }
 
             }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                todoViewModel.validationEvents.collect {
-                    when (it) {
-                        is TodoViewModel.ValidationEvent.Success -> {
-                            val newValue =
-                                FormateValue.validateAndFormatNumber(dialogBinding.etValue.text.toString())
-                            val todo = TodoInfo(
-                                dialogBinding.etTodoName.text.toString().uppercase(),
-                                newValue
-                            )
-                            todoViewModel.onEvent(TodoEvent.AddTodo(todo))
+        collectLatestLifecycleFlow(todoViewModel.validationUIState){
+            if (it.nameTodoError != null) {
+                dialogBinding.textInputLayout.error = it.nameTodoError
 
-                            dialogBinding.etValue.text?.clear()
-                            dialogBinding.etTodoName.text?.clear()
-                            dialogBinding.textInputLayout.error = null
-                            dialogBinding.textInputLayout2.error = null
-                            Toast.makeText(requireContext(), "TO-DO ADDED", Toast.LENGTH_SHORT)
-                                .show()
-                            dialog?.dismiss()
-                        }
-
-                    }
-                }
+            }
+            if (it.valueTodoError != null) {
+                dialogBinding.textInputLayout2.error = it.valueTodoError
             }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                todoViewModel.validationUIState.collect() {
 
-                    if (it.nameTodoError != null) {
-                        dialogBinding.textInputLayout.error = it.nameTodoError
-
-                    }
-                    if (it.valueTodoError != null) {
-                        dialogBinding.textInputLayout2.error = it.valueTodoError
-
-                    }
-                }
-            }
-        }
 
         binding.fab.setOnClickListener {
-            dialog?.show()
+            todoViewModel.onEventValidation(RegistrationTodoEvent.onDialogShow(true))
         }
+
         dialogBinding.btnAdd.setOnClickListener {
             todoViewModel.onEventValidation(RegistrationTodoEvent.Add)
             llManager.scrollToPositionWithOffset(todoAdapter.itemCount - 1, 10)
+        }
+
+        dialog!!.setOnDismissListener{
+            todoViewModel.onEventValidation(RegistrationTodoEvent.onDialogShow(false))
         }
         writingTodoName()
         writingValue()
     }
 
-    override fun onPause() {
-        Log.d("EVENTS FRAGMENTS", "FRAGMENT TODO - ON PAUSE")
-
-        super.onPause()
+    private fun formatTodo(title:String,  value:String):TodoInfo{
+        val newValue = FormateValue.validateAndFormatNumber(value)
+        return TodoInfo(title.uppercase(), newValue)
     }
 
     private fun writingTodoName() {
@@ -163,28 +160,25 @@ class TodoFragment : Fragment() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
+            dialog!!.setCancelable(true)
+            dialog!!.setCanceledOnTouchOutside(true)
+
         }
     }
 
-    private fun dissmissDialog() {
-        dialog?.dismiss()
-        dialog = null
+
+    private fun <T>  Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit){
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                flow.collectLatest(collect)
+            }
+        }
     }
 
-
-    override fun onStop() {
-        dissmissDialog()
-        Log.d("EVENTS FRAGMENTS", "FRAGMENT TODO - ON STOP")
-        super.onStop()
-    }
-
-    override fun onDestroyView() {
-        Log.d("EVENTS FRAGMENTS", "FRAGMENT TODO - ON DESTROYVIEW")
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        Log.d("EVENTS FRAGMENTS", "FRAGMENT TODO - ON DESTROY")
-        super.onDestroy()
+    override fun onStart() {
+        if(todoViewModel.isDialogShow.value){
+            todoViewModel.onEventValidation(RegistrationTodoEvent.onDialogShow(true))
+        }
+        super.onStart()
     }
 }
