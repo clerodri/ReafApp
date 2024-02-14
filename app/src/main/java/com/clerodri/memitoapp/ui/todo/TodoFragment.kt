@@ -80,13 +80,14 @@ class TodoFragment : Fragment() {
             }
         }
         collectLatestLifecycleFlow(todoViewModel.validationUIState){
-            if (it.nameTodoError != null) {
-                dialogBinding.textInputLayout.error = it.nameTodoError
 
+            it.nameTodoError?.let {nameFail ->
+                dialogBinding.textInputLayout.error = nameFail
             }
-            if (it.valueTodoError != null) {
-                dialogBinding.textInputLayout2.error = it.valueTodoError
+            it.valueTodoError?.let {valueFail ->
+                dialogBinding.textInputLayout2.error = valueFail
             }
+
         }
 
 
